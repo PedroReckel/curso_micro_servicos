@@ -7,5 +7,5 @@ server:
 
 eureka:
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: false #Configurar para o eureka não se auto registrar
+    fetch-registry: false #Não buscar os registros dos microservicos (quem vai fazer isso será o gateway)
