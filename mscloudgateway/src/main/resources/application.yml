@@ -6,7 +6,7 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true #Estou habilitando o localizador de microserviços e vou localizar por lowercase como no aquivo Application
+          lower-case-service-id: true #Estou habilitando o localizador de microservicos e vou localizar por lowercase como no aquivo Application
 
 server:
   port: 8080

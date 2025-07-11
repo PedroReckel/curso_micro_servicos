@@ -18,10 +18,10 @@ public class MscloudgatewayApplication {
 	}
 
 	@Bean
-	public RouteLocator routes(RouteLocatorBuilder builder) { // Esse ojb vai fazer o redirecionamento das rotas para o discovery server
+	public RouteLocator routes(RouteLocatorBuilder builder){
 		return builder
 				.routes()
-					.route(r -> r.path("/cliente/**").uri("lb//msclientes") ) // Toda vez que eu fizer requisição para /clientes ele vai direcionar para o loadbalancer e para o mircroservico de clientes
+				.route( r -> r.path("/clientes/**").uri("lb://msclientes") ) // Toda vez que eu fizer requisição para /clientes ele vai direcionar para o loadbalancer e para o mircroservico de clientes
 				.build();
 	}
 
