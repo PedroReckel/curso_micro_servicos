@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/avaliacoes-credito")
+@RequestMapping("avaliacoes-credito")
 @RequiredArgsConstructor
 public class AvaliadorCreditoController {
 
@@ -23,6 +23,7 @@ public class AvaliadorCreditoController {
     @GetMapping(value = "situacao-cliente", params = "cpf")
     public ResponseEntity<SituacaoCliente> consultaSituacaoCliente(@RequestParam("cpf") String cpf) {
         SituacaoCliente situacaoCliente = avaliadorCreditoService.obterSituacaoCliente(cpf);
+        return ResponseEntity.ok(situacaoCliente);
     }
 
 }
