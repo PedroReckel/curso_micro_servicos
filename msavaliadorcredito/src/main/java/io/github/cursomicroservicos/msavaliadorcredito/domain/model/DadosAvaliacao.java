@@ -3,12 +3,10 @@ package io.github.cursomicroservicos.msavaliadorcredito.domain.model;
 import lombok.Data;
 
 @Data
-public class DadosCliente {
+public class DadosAvaliacao {
 
-    private Long id;
+    private String cpf;
 
-    private String nome;
-
-    private Integer idade;
+    private Long renda;
 
 }
