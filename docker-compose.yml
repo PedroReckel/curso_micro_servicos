@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - cursoms-network
+
+  eureka-server:
+    build: ./eurekaserver
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - cursoms-network
+
+  mscartoes:
+    build: ./mscartoes
+    container_name: cursoms-cartoes
+    depends_on:
+      - rabbitmq
+      - eureka-server
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://cursoms-eureka-user:ecok-usr-eeuramssur@eureka-server:8761/eureka
+    networks:
+      - cursoms-network
+
+  msclientes:
+    build: ./msclientes
+    container_name: cursoms-clientes
+    depends_on:
+      - eureka-server
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://cursoms-eureka-user:ecok-usr-eeuramssur@eureka-server:8761/eureka
+    networks:
+      - cursoms-network
+
+  msavaliadorcredito:
+    build: ./msavaliadorcredito
+    container_name: cursoms-avaliadorcredito
+    depends_on:
+      - rabbitmq
+      - eureka-server
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://cursoms-eureka-user:ecok-usr-eeuramssur@eureka-server:8761/eureka
+    networks:
+      - cursoms-network   
+
+networks:
+  cursoms-network:
+    driver: bridge
