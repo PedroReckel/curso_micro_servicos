@@ -55,6 +55,34 @@ services:
     networks:
       - cursoms-network   
 
+  mscloudgateway:
+    build: ./mscloudgateway
+    container_name: cursoms-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+      - keycloak
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://cursoms-eureka-user:ecok-usr-eeuramssur@eureka-server:8761/eureka
+      - KEYCLOAK_SERVER=localhost
+      - KEYCLOAK_PORT=8080
+    networks:
+      - cursoms-network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:18.0.0
+    container_name: keycloak
+    ports:
+      - "8081:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: dev-file
+    command: start-dev
+    networks:
+      - cursoms-network
+
 networks:
   cursoms-network:
     driver: bridge
