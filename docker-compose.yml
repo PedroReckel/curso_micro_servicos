@@ -27,6 +27,7 @@ services:
     depends_on:
       - rabbitmq
       - eureka-server
+      - msavaliadorcredito
     environment:
       - SPRING_RABBITMQ_HOST=rabbitmq
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://cursoms-eureka-user:ecok-usr-eeuramssur@eureka-server:8761/eureka
@@ -65,7 +66,7 @@ services:
       - keycloak
     environment:
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://cursoms-eureka-user:ecok-usr-eeuramssur@eureka-server:8761/eureka
-      - KEYCLOAK_SERVER=localhost
+      - KEYCLOAK_SERVER=keycloak
       - KEYCLOAK_PORT=8080
     networks:
       - cursoms-network
