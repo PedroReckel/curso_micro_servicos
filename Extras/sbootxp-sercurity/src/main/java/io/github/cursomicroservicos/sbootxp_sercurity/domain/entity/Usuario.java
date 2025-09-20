@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 public class Usuario {
@@ -16,5 +18,7 @@ public class Usuario {
     private String login;
     private String senha;
     private String nome;
+
+    private List<String> permissoes;
 
 }

@@ -24,7 +24,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(
-            HttpSecurity http, SenhaMasterAuthenticationProvider senhaMasterAuthenticationProvider, CustomFilter customFilter) throws Exception {
+            HttpSecurity http,
+            SenhaMasterAuthenticationProvider senhaMasterAuthenticationProvider,
+            CurstomAuthenticationProvider curstomAuthenticationProvider,
+            CustomFilter customFilter) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(customizer -> {
@@ -36,6 +39,7 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
                 .authenticationProvider(senhaMasterAuthenticationProvider)
+                .authenticationProvider(curstomAuthenticationProvider)
                 .addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
